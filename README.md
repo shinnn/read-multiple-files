@@ -39,7 +39,7 @@ var readMultipleFiles = require('read-multiple-files');
 ### readMultipleFiles(*paths* [, *options*], *callback*)
 
 *paths*: `Array` of `String`  
-*options*: `Object` ([fs.readFile] options)  
+*options*: `Object` ([fs.readFile] options) or `String` (encoding)  
 *callback*: `Function`
 
 It is similar to [fs.readFile]. The only deference is that it takes an array of multiple file paths as its first argument.
@@ -49,7 +49,7 @@ It is similar to [fs.readFile]. The only deference is that it takes an array of 
 *error*: `Error` if it fails to read the file, otherwise `null`  
 *contents*: `Array` of `Buffer` or `String` (according to `encoding` option)
 
-The second argument will be an array of file contents. Its order follows the order of file paths. 
+The second argument will be an array of file contents. The order of contents follows the order of file paths. 
 
 ```javascript
 var readMultipleFiles = require('read-multiple-files');
