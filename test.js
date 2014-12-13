@@ -4,36 +4,36 @@ var noop = require('nop');
 var readMultipleFiles = require('./');
 var test = require('tape');
 
+function toHex(str) {
+  return new Buffer(str).toString('hex');
+}
+
 test('readMultipleFiles()', function(t) {
-  t.plan(11);
+  t.plan(9);
+
+  t.equal(readMultipleFiles.name, 'readMultipleFiles', 'should have a function name.');
 
   readMultipleFiles(['.gitignore', '.gitattributes'], 'hex', function(err, contents) {
     t.deepEqual(
-      contents, [
-        new Buffer('node_modules\ncoverage\n').toString('hex'),
-        new Buffer('* text=auto\n').toString('hex')
-      ],
-      'should reflect file encoding to the result.'
+      [err, contents],
+      [null, [toHex('node_modules\ncoverage\n'), toHex('* text=auto\n')]],
+      'should reflect file encoding to all results.'
     );
-    t.strictEqual(err, null, 'should read all files without any errors.');
   });
 
   readMultipleFiles(['./.gitignore'], {encoding: 'base64'}, function(err, contents) {
     t.deepEqual(
-      contents, [new Buffer('node_modules\ncoverage\n').toString('base64')],
-      'should reflect fs.readFile options to the result.'
+      [err, contents],
+      [null, [new Buffer('node_modules\ncoverage\n').toString('base64')]],
+      'should support fs.readFile options.'
     );
-    t.strictEqual(err, null, 'should read a file without any errors.');
   });
 
   readMultipleFiles([], function(err, contents) {
     t.deepEqual(
-      contents, [],
+      [err, contents],
+      [null, []],
       'should pass an empty array to the callback when it takes an empty array.'
-    );
-    t.strictEqual(
-      err, null,
-      'should not pass any errors to the callback even if it takes an empty array.'
     );
   });
 
@@ -49,17 +49,20 @@ test('readMultipleFiles()', function(t) {
   });
 
   t.throws(
-    readMultipleFiles.bind(null, []), /TypeError.*Last argument/,
+    readMultipleFiles.bind(null, []),
+    /TypeError.*Last argument/,
     'should throw a type error when the last argument is not a function.'
   );
 
   t.throws(
-    readMultipleFiles.bind(null, 'test.js', noop), /TypeError.*must be an array/,
+    readMultipleFiles.bind(null, 'test.js', noop),
+    /TypeError.*must be an array/,
     'should throw a type error when the first argument is not an array.'
   );
 
   t.throws(
-    readMultipleFiles.bind(null, ['test.js', ['index.js']], noop), /TypeError.*path/,
-    'should throw a type error when the first argument contains non-string values.'
+    readMultipleFiles.bind(null, ['test.js', ['index.js']], noop),
+    /TypeError.*path/,
+    'should throw a type error when the array contains non-string values.'
   );
 });
