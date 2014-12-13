@@ -8,7 +8,7 @@
     "url": "https://github.com/shinnn"
   },
   "scripts": {
-    "pretest": "eslint *.js & jscs *.js",
+    "pretest": "jscs *.js && eslint *.js",
     "test": "node test.js | tap-spec",
     "coverage": "istanbul cover test.js",
     "coveralls": "${npm_package_scripts_coverage} && istanbul-coveralls"
@@ -26,6 +26,7 @@
   "keywords": [
     "fs",
     "multiple",
+    "parallel",
     "file",
     "files",
     "read",
@@ -38,7 +39,7 @@
     "run-parallel": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^0.10.1",
+    "eslint": "^0.10.2",
     "istanbul": "^0.3.5",
     "istanbul-coveralls": "^1.0.1",
     "jscs": "^1.8.1",
