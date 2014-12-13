@@ -46,7 +46,7 @@ It is similar to [fs.readFile]. The only deference is that it takes an array of 
 
 #### callback(*error*, *contents*)
 
-*error*: `Error` if it fails to read the file, otherwise `null`  
+*error*: `Error` if it fails to read at least one of the files, otherwise `null`  
 *contents*: `Array` of `Buffer` or `String` (according to `encoding` option)
 
 The second argument will be an array of file contents. The order of contents follows the order of file paths. 
@@ -84,7 +84,7 @@ readMultipleFiles(['foo.txt', 'bar.txt', 'baz.txt'], function(err, contents) {
 
 ## Related project
 
-* [read-files-promise](https://github.com/shinnn/read-files-promise) ([Promise](https://promisesaplus.com/) version)
+* [read-files-promise](https://github.com/shinnn/read-files-promise) ([Promises/A+](https://promisesaplus.com/) version)
 
 ## License
 
