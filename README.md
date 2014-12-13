@@ -22,11 +22,11 @@ readMultipleFiles(['one.txt', 'another.txt'], function(err, bufs) {
 
 ## Installation
 
-[![NPM version](https://badge.fury.io/js/read-multiple-files.svg)](http://badge.fury.io/js/read-multiple-files)
+[![NPM version](https://badge.fury.io/js/read-multiple-files.svg)](https://www.npmjs.com/package/read-multiple-files)
 
-[Use npm.](https://www.npmjs.org/doc/cli/npm-install.html)
+[Use npm.](https://docs.npmjs.com/cli/install)
 
-```
+```sh
 npm install read-multiple-files
 ```
 
