@@ -2,7 +2,6 @@
  * read-multiple-files | MIT (c) Shinnosuke Watanabe
  * https://github.com/shinnn/read-multiple-files
 */
-
 'use strict';
 
 var fs = require('graceful-fs');
@@ -29,6 +28,6 @@ module.exports = function readMultipleFiles(filePaths, options, cb) {
       cb(err);
       return;
     }
-    cb(err, result);
+    cb(null, result);
   });
 };
