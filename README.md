@@ -38,11 +38,9 @@ var readMultipleFiles = require('read-multiple-files');
 
 ### readMultipleFiles(*paths* [, *options*], *callback*)
 
-*paths*: `Array` of `String`  
+*paths*: `Array` of `String` (file paths)  
 *options*: `Object` ([fs.readFile] options) or `String` (encoding)  
 *callback*: `Function`
-
-It is similar to [fs.readFile]. The only deference is that it takes an array of multiple file paths as its first argument.
 
 #### callback(*error*, *contents*)
 
@@ -50,6 +48,8 @@ It is similar to [fs.readFile]. The only deference is that it takes an array of 
 *contents*: `Array` of `Buffer` or `String` (according to `encoding` option)
 
 The second argument will be an array of file contents. The order of contents follows the order of file paths. 
+
+It automatically strips [UTF-8 byte order mark](http://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from results.
 
 ```javascript
 var readMultipleFiles = require('read-multiple-files');
@@ -66,7 +66,7 @@ readMultipleFiles(['foo.txt', 'bar.txt'], 'utf8', function(err, contents) {
 });
 ```
 
-If it fails to read at least one file, it passes an error to the first argument and doesn't pass any values to the second argument.
+If it fails to read at least one of the files, it passes an error to the first argument and doesn't pass any values to the second argument.
 
 ```javascript
 var readMultipleFiles = require('read-multiple-files');

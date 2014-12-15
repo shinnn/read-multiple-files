@@ -6,6 +6,7 @@
 
 var fs = require('graceful-fs');
 var runParalell = require('run-parallel');
+var stripBom = require('strip-bom');
 
 module.exports = function readMultipleFiles(filePaths, options, cb) {
   if (cb === undefined) {
@@ -28,6 +29,6 @@ module.exports = function readMultipleFiles(filePaths, options, cb) {
       cb(err);
       return;
     }
-    cb(null, result);
+    cb(null, stripBom(result));
   });
 };

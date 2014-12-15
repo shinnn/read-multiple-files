@@ -36,7 +36,8 @@
   ],
   "dependencies": {
     "graceful-fs": "^3.0.5",
-    "run-parallel": "^1.0.0"
+    "run-parallel": "^1.0.0",
+    "strip-bom": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^0.10.2",
