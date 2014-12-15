@@ -11,10 +11,13 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install --production
-  - npm install nop tape
+  - npm install tape
 
 build: off
 
 test_script:
   - ps: 'node test.js #PowerShell'
   - cmd: node test.js
+
+cache:
+  - node_modules
