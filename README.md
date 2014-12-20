@@ -1,10 +1,10 @@
 # read-multiple-files 
 
-[![Build Status](https://travis-ci.org/shinnn/read-multiple-files.svg?branch=master)](https://travis-ci.org/shinnn/read-multiple-files)
+[![Build Status](https://img.shields.io/travis/shinnn/read-multiple-files.svg?style=flat)](https://travis-ci.org/shinnn/read-multiple-files)
 [![Build status](https://ci.appveyor.com/api/projects/status/ia3h5bcsy84vgfpc?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/read-multiple-files)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg)](https://coveralls.io/r/shinnn/read-multiple-files)
-[![Dependency Status](https://david-dm.org/shinnn/read-multiple-files.svg)](https://david-dm.org/shinnn/read-multiple-files)
-[![devDependency Status](https://david-dm.org/shinnn/read-multiple-files/dev-status.svg)](https://david-dm.org/shinnn/read-multiple-files#info=devDependencies)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg?style=flat)](https://coveralls.io/r/shinnn/read-multiple-files)
+[![Dependency Status](https://david-dm.org/shinnn/read-multiple-files.svg?style=flat)](https://david-dm.org/shinnn/read-multiple-files)
+[![devDependency Status](https://david-dm.org/shinnn/read-multiple-files/dev-status.svg?style=flat)](https://david-dm.org/shinnn/read-multiple-files#info=devDependencies)
 
 A [Node](http://nodejs.org/) module to read multiple files asynchronously
 
@@ -22,7 +22,7 @@ readMultipleFiles(['one.txt', 'another.txt'], function(err, bufs) {
 
 ## Installation
 
-[![NPM version](https://badge.fury.io/js/read-multiple-files.svg)](https://www.npmjs.com/package/read-multiple-files)
+[![NPM version](https://img.shields.io/npm/v/read-multiple-files.svg?style=flat)](https://www.npmjs.com/package/read-multiple-files)
 
 [Use npm.](https://docs.npmjs.com/cli/install)
 
