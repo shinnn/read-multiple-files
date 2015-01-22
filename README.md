@@ -1,10 +1,11 @@
 # read-multiple-files 
 
+[![NPM version](https://img.shields.io/npm/v/read-multiple-files.svg?style=flat)](https://www.npmjs.com/package/read-multiple-files)
 [![Build Status](https://img.shields.io/travis/shinnn/read-multiple-files.svg?style=flat)](https://travis-ci.org/shinnn/read-multiple-files)
 [![Build status](https://ci.appveyor.com/api/projects/status/ia3h5bcsy84vgfpc?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/read-multiple-files)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg?style=flat)](https://coveralls.io/r/shinnn/read-multiple-files)
-[![Dependency Status](https://david-dm.org/shinnn/read-multiple-files.svg?style=flat)](https://david-dm.org/shinnn/read-multiple-files)
-[![devDependency Status](https://david-dm.org/shinnn/read-multiple-files/dev-status.svg?style=flat)](https://david-dm.org/shinnn/read-multiple-files#info=devDependencies)
+[![Dependency Status](https://img.shields.io/david/shinnn/read-multiple-files.svg?style=flat&label=deps)](https://david-dm.org/shinnn/read-multiple-files)
+[![devDependency Status](https://img.shields.io/david/dev/shinnn/read-multiple-files.svg?style=flat&label=devDeps)](https://david-dm.org/shinnn/read-multiple-files#info=devDependencies)
 
 A [Node](http://nodejs.org/) module to read multiple files asynchronously
 
@@ -21,8 +22,6 @@ readMultipleFiles(['one.txt', 'another.txt'], function(err, bufs) {
 ```
 
 ## Installation
-
-[![NPM version](https://img.shields.io/npm/v/read-multiple-files.svg?style=flat)](https://www.npmjs.com/package/read-multiple-files)
 
 [Use npm.](https://docs.npmjs.com/cli/install)
 
@@ -88,8 +87,8 @@ readMultipleFiles(['foo.txt', 'bar.txt', 'baz.txt'], function(err, contents) {
 
 ## License
 
-Copyright (c) 2014 [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
-[fs.readFile]: http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback
+[fs.readFile]: https://iojs.org/api/fs.html#fs_fs_readfile_filename_options_callback
