@@ -1,11 +1,11 @@
 # read-multiple-files 
 
-[![NPM version](https://img.shields.io/npm/v/read-multiple-files.svg?style=flat)](https://www.npmjs.com/package/read-multiple-files)
-[![Build Status](https://img.shields.io/travis/shinnn/read-multiple-files.svg?style=flat)](https://travis-ci.org/shinnn/read-multiple-files)
+[![NPM version](https://img.shields.io/npm/v/read-multiple-files.svg)](https://www.npmjs.com/package/read-multiple-files)
+[![Build Status](https://img.shields.io/travis/shinnn/read-multiple-files.svg)](https://travis-ci.org/shinnn/read-multiple-files)
 [![Build status](https://ci.appveyor.com/api/projects/status/ia3h5bcsy84vgfpc?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/read-multiple-files)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg?style=flat)](https://coveralls.io/r/shinnn/read-multiple-files)
-[![Dependency Status](https://img.shields.io/david/shinnn/read-multiple-files.svg?style=flat&label=deps)](https://david-dm.org/shinnn/read-multiple-files)
-[![devDependency Status](https://img.shields.io/david/dev/shinnn/read-multiple-files.svg?style=flat&label=devDeps)](https://david-dm.org/shinnn/read-multiple-files#info=devDependencies)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg)](https://coveralls.io/r/shinnn/read-multiple-files)
+[![Dependency Status](https://img.shields.io/david/shinnn/read-multiple-files.svg?label=deps)](https://david-dm.org/shinnn/read-multiple-files)
+[![devDependency Status](https://img.shields.io/david/dev/shinnn/read-multiple-files.svg?label=devDeps)](https://david-dm.org/shinnn/read-multiple-files#info=devDependencies)
 
 A [Node](http://nodejs.org/) module to read multiple files asynchronously
 
@@ -87,7 +87,7 @@ readMultipleFiles(['foo.txt', 'bar.txt', 'baz.txt'], function(err, contents) {
 
 ## License
 
-Copyright (c) [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
