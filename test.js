@@ -56,13 +56,13 @@ test('readMultipleFiles()', function(t) {
 
   t.throws(
     readMultipleFiles.bind(null, []),
-    /TypeError.*Last argument/,
+    /TypeError.* is not a function.*Last argument/,
     'should throw a type error when the last argument is not a function.'
   );
 
   t.throws(
     readMultipleFiles.bind(null, 'test.js', t.fail),
-    /TypeError.*must be an array/,
+    /TypeError.* is not an array.*must be an array/,
     'should throw a type error when the first argument is not an array.'
   );
 

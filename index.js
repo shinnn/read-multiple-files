@@ -15,11 +15,17 @@ module.exports = function readMultipleFiles(filePaths, options, cb) {
   }
 
   if (typeof cb !== 'function') {
-    throw new TypeError(cb + ' is not a function. Last argument must be a function.');
+    throw new TypeError(
+      cb +
+      ' is not a function. Last argument to read-multiple-files must be a callback function.'
+    );
   }
 
   if (!Array.isArray(filePaths)) {
-    throw new TypeError(filePaths + ' is not an array. First Argument must be an array.');
+    throw new TypeError(
+      filePaths +
+      ' is not an array. First Argument to read-multiple-files must be an array of file paths.'
+    );
   }
 
   runParalell(filePaths.map(function(filePath) {
