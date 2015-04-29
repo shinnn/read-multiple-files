@@ -8,7 +8,7 @@
     "url": "https://github.com/shinnn"
   },
   "scripts": {
-    "pretest": "jscs *.js && eslint *.js",
+    "pretest": "eslint --config node_modules/@shinnn/eslintrc-node/rc.json index.js test.js",
     "test": "node test.js | tap-spec",
     "coverage": "istanbul cover test.js",
     "coveralls": "${npm_package_scripts_coverage} && istanbul-coveralls"
@@ -34,22 +34,16 @@
     "asynchronously"
   ],
   "dependencies": {
-    "graceful-fs": "^3.0.5",
-    "run-parallel": "^1.0.0",
+    "graceful-fs": "^3.0.6",
+    "run-parallel": "^1.1.0",
     "strip-bom": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^0.14.1",
-    "istanbul": "^0.3.5",
-    "istanbul-coveralls": "^1.0.1",
-    "jscs": "^1.11.3",
-    "tap-spec": "^2.2.1",
-    "tape": "^3.5.0"
-  },
-  "jscsConfig": {
-    "preset": "google",
-    "maximumLineLength": 98,
-    "requireBlocksOnNewline": true,
-    "validateLineBreaks": "LF"
+    "@shinnn/eslintrc-node": "^1.0.2",
+    "eslint": "^0.20.0",
+    "istanbul": "^0.3.13",
+    "istanbul-coveralls": "^1.0.2",
+    "tap-spec": "^3.0.0",
+    "tape": "^4.0.0"
   }
 }
