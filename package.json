@@ -3,22 +3,14 @@
   "version": "1.1.0",
   "description": "Read multiple files asynchronously",
   "repository": "shinnn/read-multiple-files",
-  "author": {
-    "name": "Shinnosuke Watanabe",
-    "url": "https://github.com/shinnn"
-  },
+  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
-    "pretest": "eslint --config node_modules/@shinnn/eslintrc-node/rc.json index.js test.js",
+    "pretest": "dependency-check . && dependency-check . --unused --no-dev && eslint --config node_modules/@shinnn/eslintrc-node/rc.json index.js test.js",
     "test": "node test.js | tap-spec",
     "coverage": "istanbul cover test.js",
     "coveralls": "${npm_package_scripts_coverage} && istanbul-coveralls"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/shinnn/read-multiple-files/blob/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "files": [
     "index.js"
   ],
@@ -34,14 +26,15 @@
     "asynchronously"
   ],
   "dependencies": {
-    "graceful-fs": "^3.0.6",
-    "run-parallel": "^1.1.0",
+    "graceful-fs": "^3.0.7",
+    "run-parallel": "^1.1.1",
     "strip-bom": "^1.0.0"
   },
   "devDependencies": {
     "@shinnn/eslintrc-node": "^1.0.2",
-    "eslint": "^0.20.0",
-    "istanbul": "^0.3.13",
+    "dependency-check": "^2.4.0",
+    "eslint": "^0.21.2",
+    "istanbul": "^0.3.14",
     "istanbul-coveralls": "^1.0.2",
     "tap-spec": "^3.0.0",
     "tape": "^4.0.0"
