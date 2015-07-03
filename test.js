@@ -9,7 +9,7 @@ var expected = [
 ];
 
 test('readMultipleFiles()', function(t) {
-  t.plan(10);
+  t.plan(11);
 
   t.equal(readMultipleFiles.name, 'readMultipleFiles', 'should have a function name.');
 
@@ -70,5 +70,11 @@ test('readMultipleFiles()', function(t) {
     readMultipleFiles.bind(null, ['test.js', ['index.js']], t.fail),
     /TypeError.*path/,
     'should throw a type error when the array contains non-string values.'
+  );
+
+  t.throws(
+    readMultipleFiles.bind(null, ['test.js'], {encoding: 'utf7'}, t.fail),
+    /Unknown encoding/,
+    'should throw an error when it takes an invalid fs.readFile option.'
   );
 });
