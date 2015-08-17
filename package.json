@@ -5,7 +5,7 @@
   "repository": "shinnn/read-multiple-files",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
-    "pretest": "dependency-check . && dependency-check . --unused --no-dev && eslint --config node_modules/@shinnn/eslintrc-node/rc.json index.js test.js",
+    "pretest": "dependency-check . && dependency-check . --unused --no-dev && eslint --config @shinnn/node index.js test.js",
     "test": "node test.js | tap-spec",
     "coverage": "istanbul cover test.js",
     "coveralls": "${npm_package_scripts_coverage} && istanbul-coveralls"
@@ -18,6 +18,7 @@
     "fs",
     "multiple",
     "parallel",
+    "parallelly",
     "file",
     "files",
     "read",
@@ -31,12 +32,12 @@
     "strip-bom": "^2.0.0"
   },
   "devDependencies": {
-    "@shinnn/eslintrc-node": "^1.0.2",
-    "dependency-check": "^2.5.0",
-    "eslint": "^0.24.0",
-    "istanbul": "^0.3.17",
+    "@shinnn/eslint-config-node": "^1.0.1",
+    "dependency-check": "^2.5.1",
+    "eslint": "^1.6.0",
+    "istanbul": "^0.3.22",
     "istanbul-coveralls": "^1.0.3",
-    "tap-spec": "^4.0.2",
-    "tape": "^4.0.0"
+    "tap-spec": "^4.1.0",
+    "tape": "^4.2.1"
   }
 }
