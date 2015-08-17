@@ -91,4 +91,4 @@ Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
-[fs.readFile]: https://iojs.org/api/fs.html#fs_fs_readfile_filename_options_callback
+[fs.readFile]: https://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback
