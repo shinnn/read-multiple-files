@@ -4,8 +4,8 @@ const readMultipleFiles = require('.');
 const test = require('tape');
 
 const expected = [
-  new Buffer('node_modules\ncoverage\n'),
-  new Buffer('* text=auto\n')
+  Buffer.from('node_modules\ncoverage\n'),
+  Buffer.from('* text=auto\n')
 ];
 
 test('readMultipleFiles()', t => {

@@ -1,13 +1,11 @@
-# read-multiple-files 
+# read-multiple-files
 
-[![NPM version](https://img.shields.io/npm/v/read-multiple-files.svg)](https://www.npmjs.com/package/read-multiple-files)
+[![npm version](https://img.shields.io/npm/v/read-multiple-files.svg)](https://www.npmjs.com/package/read-multiple-files)
 [![Build Status](https://travis-ci.org/shinnn/read-multiple-files.svg?branch=master)](https://travis-ci.org/shinnn/read-multiple-files)
 [![Build status](https://ci.appveyor.com/api/projects/status/ia3h5bcsy84vgfpc?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/read-multiple-files)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg)](https://coveralls.io/r/shinnn/read-multiple-files)
-[![Dependency Status](https://img.shields.io/david/shinnn/read-multiple-files.svg?label=deps)](https://david-dm.org/shinnn/read-multiple-files)
-[![devDependency Status](https://img.shields.io/david/dev/shinnn/read-multiple-files.svg?label=devDeps)](https://david-dm.org/shinnn/read-multiple-files#info=devDependencies)
 
-A [Node](https://nodejs.org/) module to read multiple files asynchronously
+A [Node.js](https://nodejs.org/) module to read multiple files asynchronously
 
 ```javascript
 const readMultipleFiles = require('read-multiple-files');
@@ -23,7 +21,7 @@ readMultipleFiles(['one.txt', 'another.txt'], (err, bufs) => {
 
 ## Installation
 
-[Use npm.](https://docs.npmjs.com/cli/install)
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
 
 ```
 npm install read-multiple-files
@@ -37,16 +35,16 @@ const readMultipleFiles = require('read-multiple-files');
 
 ### readMultipleFiles(*paths* [, *options*], *callback*)
 
-*paths*: `Array` of `String` (file paths)  
-*options*: `Object` ([fs.readFile] options) or `String` (encoding)  
+*paths*: `Array<string|Buffer|URL|integer>` (file paths)  
+*options*: `Object` ([fs.readFile] options) or `string` (encoding)  
 *callback*: `Function`
 
 #### callback(*error*, *contents*)
 
 *error*: `Error` if it fails to read at least one of the files, otherwise `null`  
-*contents*: `Array` of `Buffer` or `String` (according to `encoding` option)
+*contents*: `Array` of `Buffer` or `string` (according to `encoding` option)
 
-The second argument will be an array of file contents. The order of contents follows the order of file paths. 
+The second argument will be an array of file contents. The order of contents follows the order of file paths.
 
 It automatically strips [UTF-8 byte order mark](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from results.
 
@@ -83,12 +81,12 @@ readMultipleFiles(['foo.txt', 'bar.txt', 'baz.txt'], (err, contents) => {
 
 ## Related project
 
-* [read-files-promise](https://github.com/shinnn/read-files-promise) ([Promises/A+](https://promisesaplus.com/) version)
+* [read-files-promise](https://github.com/shinnn/read-files-promise) ([Promises](https://promisesaplus.com/) version)
 
 ## License
 
-Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) 2014 - 2017 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE).
 
-[fs.readFile]: https://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback
+[fs.readFile]: https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback

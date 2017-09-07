@@ -1,10 +1,8 @@
 sudo: false
-git:
-  depth: 1
 branches:
   except: /^v\d/
 language: node_js
-node_js: stable
-after_script: npm run-script coveralls
-notifications:
-  email: false
+node_js: node
+after_script:
+  - npm install coveralls
+  - node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls

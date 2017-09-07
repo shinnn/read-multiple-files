@@ -1,9 +1,7 @@
 shallow_clone: true
-version: '{build}'
 skip_tags: true
 install:
   - ps: Install-Product node 4
   - npm install
 build: off
 test_script: node test.js
-cache: node_modules -> package.json
