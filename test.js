@@ -4,12 +4,12 @@ const readMultipleFiles = require('.');
 const test = require('tape');
 
 const expected = [
-  Buffer.from('node_modules\ncoverage\n'),
+  Buffer.from('.nyc_output\nnode_modules\ncoverage\n'),
   Buffer.from('* text=auto\n')
 ];
 
 test('readMultipleFiles()', t => {
-  t.plan(11);
+  t.plan(14);
 
   t.equal(readMultipleFiles.name, 'readMultipleFiles', 'should have a function name.');
 
@@ -41,40 +41,58 @@ test('readMultipleFiles()', t => {
     );
   });
 
-  readMultipleFiles(['.gitattributes', 'node_modules', 'index.js'], function(err) {
+  readMultipleFiles(['.gitattributes', 'node_modules', 'index.js'], ({code}, ...restArgs) => {
     t.equal(
-      err.code,
+      code,
       'EISDIR',
       'should pass an error to the callback when it fails to read files.'
     );
     t.equal(
-      arguments.length,
-      1,
+      restArgs.length,
+      0,
       'should not pass any buffers to the callback when it fails to read files.'
     );
   });
 
   t.throws(
-    () => readMultipleFiles([]),
+    () => readMultipleFiles([], new Set()),
     /TypeError.* is not a function.*Last argument/,
-    'should throw a type error when the last argument is not a function.'
+    'should throw an error when the last argument is not a function.'
   );
 
   t.throws(
     () => readMultipleFiles('test.js', t.fail),
     /TypeError.* is not an array.*must be an array/,
-    'should throw a type error when the first argument is not an array.'
+    'should throw an error when the first argument is not an array.'
   );
 
   t.throws(
     () => readMultipleFiles(['test.js', ['index.js']], t.fail),
     /TypeError.*path/,
-    'should throw a type error when the array contains non-string values.'
+    'should throw an error when the array contains non-string values.'
   );
 
   t.throws(
     () => readMultipleFiles(['test.js'], {encoding: 'utf7'}, t.fail),
     /Unknown encoding/,
     'should throw an error when it takes an invalid fs.readFile option.'
+  );
+
+  t.throws(
+    () => readMultipleFiles(),
+    /^RangeError: Expected 2 or 3 arguments .*, but got no arguments instead\./,
+    'should throw an error when it takes no arguments.'
+  );
+
+  t.throws(
+    () => readMultipleFiles('a'),
+    /^RangeError: Expected 2 or 3 arguments .*, but got 1 argument instead\./,
+    'should throw an error when it takes a single arguments.'
+  );
+
+  t.throws(
+    () => readMultipleFiles('a', 'b', 'c', 'd'),
+    /^RangeError: Expected 2 or 3 arguments .*, but got 4 arguments instead\./,
+    'should throw an error when it takes too many arguments.'
   );
 });
