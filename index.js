@@ -4,6 +4,7 @@
 */
 'use strict';
 
+const inspectWithKind = require('inspect-with-kind');
 const {readFile} = require('graceful-fs');
 const runParalell = require('run-parallel');
 const stripBom = require('strip-bom');
@@ -23,12 +24,12 @@ module.exports = function readMultipleFiles(...args) {
   const [filePaths, options, cb] = argLen === 3 ? args : [args[0], {}, args[1]];
 
   if (typeof cb !== 'function') {
-    throw new TypeError(cb +
+    throw new TypeError(inspectWithKind(cb) +
       ' is not a function. Last argument to read-multiple-files must be a callback function.');
   }
 
   if (!Array.isArray(filePaths)) {
-    throw new TypeError(filePaths +
+    throw new TypeError(inspectWithKind(filePaths) +
       ' is not an array. First Argument to read-multiple-files must be an array of file paths.');
   }
 

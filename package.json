@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "graceful-fs": "^4.1.11",
+    "inspect-with-kind": "^1.0.2",
     "run-parallel": "^1.1.6",
     "strip-bom": "^3.0.0",
     "strip-bom-buf": "^1.0.0"

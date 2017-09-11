@@ -56,13 +56,13 @@ test('readMultipleFiles()', t => {
 
   t.throws(
     () => readMultipleFiles([], new Set()),
-    /TypeError.* is not a function.*Last argument/,
+    /TypeError.*Set {} is not a function.*Last argument/,
     'should throw an error when the last argument is not a function.'
   );
 
   t.throws(
     () => readMultipleFiles('test.js', t.fail),
-    /TypeError.* is not an array.*must be an array/,
+    /TypeError.*'test\.js' \(string\) is not an array.*must be an array/,
     'should throw an error when the first argument is not an array.'
   );
 
