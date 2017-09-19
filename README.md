@@ -10,7 +10,7 @@ A [Node.js](https://nodejs.org/) module to read multiple files asynchronously
 ```javascript
 const readMultipleFiles = require('read-multiple-files');
 
-readMultipleFiles(['one.txt', 'another.txt'], (err, bufs) => {
+readMultipleFiles(new Set(['one.txt', 'another.txt']), (err, bufs) => {
   if (err) {
     throw err;
   }
@@ -35,14 +35,14 @@ const readMultipleFiles = require('read-multiple-files');
 
 ### readMultipleFiles(*paths* [, *options*], *callback*)
 
-*paths*: `Array<string|Buffer|URL|integer>` (file paths)  
+*paths*: `<Array|Set<string|Buffer|URL|integer>>` (file paths)  
 *options*: `Object` ([fs.readFile] options) or `string` (encoding)  
 *callback*: `Function`
 
 #### callback(*error*, *contents*)
 
 *error*: `Error` if it fails to read at least one of the files, otherwise `null`  
-*contents*: `Array` of `Buffer` or `string` (according to `encoding` option)
+*contents*: `Array<Buffer>` or `Array<string>` (according to `encoding` option)
 
 The second argument will be an array of file contents. The order of contents follows the order of file paths.
 

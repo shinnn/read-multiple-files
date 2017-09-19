@@ -13,7 +13,7 @@ test('readMultipleFiles()', t => {
 
   t.equal(readMultipleFiles.name, 'readMultipleFiles', 'should have a function name.');
 
-  readMultipleFiles(['.gitignore', '.gitattributes'], (err, contents) => {
+  readMultipleFiles(new Set(['.gitignore', '.gitattributes']), (err, contents) => {
     t.deepEqual([err, contents], [null, expected], 'should read multiple files.');
   });
 
@@ -62,7 +62,7 @@ test('readMultipleFiles()', t => {
 
   t.throws(
     () => readMultipleFiles('test.js', t.fail),
-    /TypeError.*'test\.js' \(string\) is not an array.*must be an array/,
+    /TypeError.*'test\.js' \(string\) is neither Array nor Set.*must be file paths \(<Array> or <Set>\)/,
     'should throw an error when the first argument is not an array.'
   );
 

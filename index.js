@@ -10,7 +10,7 @@ const runParalell = require('run-parallel');
 const stripBom = require('strip-bom');
 const stripBomBuf = require('strip-bom-buf');
 
-const ARG_ERR = 'Expected 2 or 3 arguments (path: <string|Buffer|URL|integer>[, options: <Object>], callback: <Function>)';
+const ARG_ERR = 'Expected 2 or 3 arguments (paths: <Array|Set>[, options: <Object>], callback: <Function>)';
 
 module.exports = function readMultipleFiles(...args) {
   const argLen = args.length;
@@ -28,12 +28,12 @@ module.exports = function readMultipleFiles(...args) {
       ' is not a function. Last argument to read-multiple-files must be a callback function.');
   }
 
-  if (!Array.isArray(filePaths)) {
+  if (!Array.isArray(filePaths) && !(filePaths instanceof Set)) {
     throw new TypeError(inspectWithKind(filePaths) +
-      ' is not an array. First Argument to read-multiple-files must be an array of file paths.');
+      ' is neither Array nor Set. First Argument to read-multiple-files must be file paths (<Array> or <Set>).');
   }
 
-  runParalell(filePaths.map(filePath => done => readFile(filePath, options, done)), (err, results) => {
+  runParalell([...filePaths].map(filePath => done => readFile(filePath, options, done)), (err, results) => {
     if (err) {
       cb(err);
       return;
