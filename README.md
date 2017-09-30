@@ -85,8 +85,4 @@ readMultipleFiles(['foo.txt', 'bar.txt', 'baz.txt'], (err, contents) => {
 
 ## License
 
-Copyright (c) 2014 - 2017 [Shinnosuke Watanabe](https://github.com/shinnn)
-
-Licensed under [the MIT License](./LICENSE).
-
-[fs.readFile]: https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback
+[ISC License](./LICENSE) © 2017 Shinnosuke Watanabe
