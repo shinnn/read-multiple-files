@@ -1,6 +1,6 @@
 {
   "name": "read-multiple-files",
-  "version": "2.0.0-3",
+  "version": "2.0.0-4",
   "description": "Read multiple files asynchronously",
   "repository": "shinnn/read-multiple-files",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^4.0.2",
-    "eslint": "^4.6.1",
+    "eslint": "^4.8.0",
     "nyc": "^11.2.1",
     "tape": "^4.8.0"
   },
