@@ -1,43 +1,46 @@
 {
-  "name": "read-multiple-files",
-  "version": "2.0.0-4",
-  "description": "Read multiple files asynchronously",
-  "repository": "shinnn/read-multiple-files",
-  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
-  "scripts": {
-    "pretest": "eslint --fix --format=codeframe index.js test.js",
-    "test": "nyc --reporter=text --reporter=html node test.js"
-  },
-  "license": "MIT",
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "fs",
-    "multiple",
-    "parallel",
-    "parallelly",
-    "file",
-    "files",
-    "read",
-    "async",
-    "asynchronous",
-    "asynchronously"
-  ],
-  "dependencies": {
-    "graceful-fs": "^4.1.11",
-    "inspect-with-kind": "^1.0.2",
-    "run-parallel": "^1.1.6",
-    "strip-bom": "^3.0.0",
-    "strip-bom-buf": "^1.0.0"
-  },
-  "devDependencies": {
-    "@shinnn/eslint-config-node": "^4.0.2",
-    "eslint": "^4.8.0",
-    "nyc": "^11.2.1",
-    "tape": "^4.8.0"
-  },
-  "eslintConfig": {
-    "extends": "@shinnn/node"
-  }
+	"name": "read-multiple-files",
+	"version": "2.0.0-4",
+	"description": "Read multiple files asynchronously",
+	"repository": "shinnn/read-multiple-files",
+	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+	"scripts": {
+		"pretest": "eslint --fix --format=codeframe index.js test.js",
+		"test": "nyc --reporter=text --reporter=html node test.js"
+	},
+	"license": "ISC",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"fs",
+		"read",
+		"reader",
+		"multiple",
+		"parallel",
+		"parallelly",
+		"file",
+		"files",
+		"read",
+		"observable",
+		"contents",
+		"buffer",
+		"async",
+		"asynchronous",
+		"asynchronously"
+	],
+	"dependencies": {
+		"graceful-fs": "^4.1.11",
+		"inspect-with-kind": "^1.0.4",
+		"zen-observable": "^0.6.0"
+	},
+	"devDependencies": {
+		"@shinnn/eslint-config-node": "^5.0.0",
+		"eslint": "^4.13.1",
+		"nyc": "^11.4.1",
+		"tape": "^4.8.0"
+	},
+	"eslintConfig": {
+		"extends": "@shinnn/node"
+	}
 }

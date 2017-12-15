@@ -4,95 +4,122 @@ const readMultipleFiles = require('.');
 const test = require('tape');
 
 const expected = [
-  Buffer.from('.nyc_output\nnode_modules\ncoverage\n'),
-  Buffer.from('* text=auto\n')
+	Buffer.from('.nyc_output\nnode_modules\ncoverage\n'),
+	Buffer.from('* text=auto\n')
 ];
 
 test('readMultipleFiles()', t => {
-  t.plan(14);
+	t.plan(13);
 
-  t.equal(readMultipleFiles.name, 'readMultipleFiles', 'should have a function name.');
+	readMultipleFiles(new Set(['.gitignore', '.gitattributes'])).subscribe({
+		next({path, contents}) {
+			if (path === '.gitignore') {
+				t.ok(contents.equals(expected[0]), 'should read files.');
+				return;
+			}
 
-  readMultipleFiles(new Set(['.gitignore', '.gitattributes']), (err, contents) => {
-    t.deepEqual([err, contents], [null, expected], 'should read multiple files.');
-  });
+			t.equal(path, '.gitattributes', 'should set `path` property to the every result.');
+			t.ok(contents.equals(expected[1]), 'should set `contents` property to the every result.');
+		},
+		error: t.fail,
+		complete() {
+			t.pass('should invoke `complete` function of the observer');
+		}
+	});
 
-  readMultipleFiles(['.gitattributes'], 'hex', (err, contents) => {
-    t.deepEqual(
-      [err, contents],
-      [null, [expected[1].toString('hex')]],
-      'should reflect file encoding to the result.'
-    );
-  });
+	readMultipleFiles(['.gitattributes'], 'hex').subscribe({
+		next({contents}) {
+			t.equal(
+				contents,
+				expected[1].toString('hex'),
+				'should reflect `encoding` string to the result.'
+			);
+		},
+		error: t.fail
+	});
 
-  readMultipleFiles(['./.gitignore'], {encoding: 'base64'}, (err, contents) => {
-    t.deepEqual(
-      [err, contents],
-      [null, [expected[0].toString('base64')]],
-      'should support fs.readFile options.'
-    );
-  });
+	readMultipleFiles([Buffer.from('./.gitignore')], {encoding: 'base64'}).subscribe({
+		next({contents}) {
+			t.equal(
+				contents,
+				expected[0].toString('base64'),
+				'should reflect `encoding` option to the result.'
+			);
+		},
+		error: t.fail
+	});
 
-  readMultipleFiles([], (err, contents) => {
-    t.deepEqual(
-      [err, contents],
-      [null, []],
-      'should pass an empty array to the callback when it takes an empty array.'
-    );
-  });
+	readMultipleFiles([]).forEach(t.fail).then(() => {
+		t.pass('should support an empty array.');
+	}, t.fail);
 
-  readMultipleFiles(['.gitattributes', 'node_modules', 'index.js'], ({code}, ...restArgs) => {
-    t.equal(
-      code,
-      'EISDIR',
-      'should pass an error to the callback when it fails to read files.'
-    );
-    t.equal(
-      restArgs.length,
-      0,
-      'should not pass any buffers to the callback when it fails to read files.'
-    );
-  });
+	const complete = t.fail.bind(t, 'Unexpectedly completed.');
 
-  t.throws(
-    () => readMultipleFiles([], new Set()),
-    /TypeError.*Set {} is not a function.*Last argument/,
-    'should throw an error when the last argument is not a function.'
-  );
+	readMultipleFiles(['.gitattributes', 'node_modules', 'index.js']).subscribe({
+		error({code}) {
+			t.equal(
+				code,
+				'EISDIR',
+				'should fail when it canot read at least one of te paths.'
+			);
+		},
+		complete
+	});
 
-  t.throws(
-    () => readMultipleFiles('test.js', t.fail),
-    /TypeError.*'test\.js' \(string\) is neither Array nor Set.*must be file paths \(<Array> or <Set>\)/,
-    'should throw an error when the first argument is not an array.'
-  );
+	readMultipleFiles('test.js').subscribe({
+		error(err) {
+			t.equal(
+				err.toString(),
+				'TypeError: Expected file paths (<Array> or <Set>), but got \'test.js\' (string) instead.',
+				'should throw an error when the first argument is neither an Array nor Set.'
+			);
+		},
+		complete
+	});
 
-  t.throws(
-    () => readMultipleFiles(['test.js', ['index.js']], t.fail),
-    /TypeError.*path/,
-    'should throw an error when the array contains non-string values.'
-  );
+	readMultipleFiles(['test.js', ['index.js']]).subscribe({
+		error(err) {
+			t.equal(
+				err.toString(),
+				'TypeError: path must be a string or Buffer',
+				'should throw an error when the array contains non-path values.'
+			);
+		},
+		complete
+	});
 
-  t.throws(
-    () => readMultipleFiles(['test.js'], {encoding: 'utf7'}, t.fail),
-    /Unknown encoding/,
-    'should throw an error when it takes an invalid fs.readFile option.'
-  );
+	const fail = t.fail.bind('Unexpectedly completed.');
 
-  t.throws(
-    () => readMultipleFiles(),
-    /^RangeError: Expected 2 or 3 arguments .*, but got no arguments instead\./,
-    'should throw an error when it takes no arguments.'
-  );
+	readMultipleFiles(['test.js'], {encoding: 'utf7'}).subscribe({
+		error({code}) {
+			t.equal(
+				code,
+				'ERR_INVALID_OPT_VALUE_ENCODING',
+				'should fail when it takes an invalid fs.readFile option.'
+			);
+		},
+		complete: fail
+	});
 
-  t.throws(
-    () => readMultipleFiles('a'),
-    /^RangeError: Expected 2 or 3 arguments .*, but got 1 argument instead\./,
-    'should throw an error when it takes a single arguments.'
-  );
+	readMultipleFiles().subscribe({
+		error({message}) {
+			t.equal(
+				message,
+				'Expected 1 or 2 arguments (paths: <Array|Set>[, options: <Object>]), but got no arguments instead.',
+				'should fail when it takes no arguments.'
+			);
+		},
+		complete: fail
+	});
 
-  t.throws(
-    () => readMultipleFiles('a', 'b', 'c', 'd'),
-    /^RangeError: Expected 2 or 3 arguments .*, but got 4 arguments instead\./,
-    'should throw an error when it takes too many arguments.'
-  );
+	readMultipleFiles('a', 'b', 'c').subscribe({
+		error({message}) {
+			t.equal(
+				message,
+				'Expected 1 or 2 arguments (paths: <Array|Set>[, options: <Object>]), but got 3 arguments instead.',
+				'should fail when it takes no arguments.'
+			);
+		},
+		complete: fail
+	});
 });

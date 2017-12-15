@@ -5,17 +5,25 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ia3h5bcsy84vgfpc?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/read-multiple-files)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg)](https://coveralls.io/r/shinnn/read-multiple-files)
 
-A [Node.js](https://nodejs.org/) module to read multiple files asynchronously
+Read multiple files [Observable](https://github.com/tc39/proposal-observable) way
 
 ```javascript
 const readMultipleFiles = require('read-multiple-files');
 
-readMultipleFiles(new Set(['one.txt', 'another.txt']), (err, bufs) => {
-  if (err) {
-    throw err;
+readMultipleFiles(new Set([
+  'one.txt',    // 'a'
+  'another.txt' // 'b'
+])).subscribe({
+  next(result) {
+    if (result.path === 'one.txt') {
+      result.contents; // Buffer.from('a')
+    } else if (result.path === 'another.txt') {
+      result.contents; // Buffer.from('b')
+    }
+  },
+  complete() {
+    console.log('Successfully read all files.');
   }
-
-  bufs; //=> [<Buffer ... >, <Buffer ... >]
 });
 ```
 
@@ -33,49 +41,44 @@ npm install read-multiple-files
 const readMultipleFiles = require('read-multiple-files');
 ```
 
-### readMultipleFiles(*paths* [, *options*], *callback*)
+### readMultipleFiles(*paths* [, *options*])
 
 *paths*: `<Array|Set<string|Buffer|URL|integer>>` (file paths)  
-*options*: `Object` ([fs.readFile] options) or `string` (encoding)  
-*callback*: `Function`
+*options*: `Object` ([`fs.readFile`](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback) options) or `string` (encoding)  
+Return: [`Observable`](https://tc39.github.io/proposal-observable/#observable) ([zenparsing's implementation](https://github.com/zenparsing/zen-observable))
 
-#### callback(*error*, *contents*)
-
-*error*: `Error` if it fails to read at least one of the files, otherwise `null`  
-*contents*: `Array<Buffer>` or `Array<string>` (according to `encoding` option)
-
-The second argument will be an array of file contents. The order of contents follows the order of file paths.
-
-It automatically strips [UTF-8 byte order mark](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8) from results.
+When the `Observable` is [subscribe](https://tc39.github.io/proposal-observable/#observable-prototype-subscribe)d, it starts to read files in parallel, successively send each result to its [`Observer`](https://github.com/tc39/proposal-observable#observer) as an `Object`: `{path: <string|Buffer|URL|integer>, contents: <string:Buffer>}`
 
 ```javascript
-const readMultipleFiles = require('read-multiple-files');
-
-// foo.txt: Hello
-// bar.txt: World
-
-readMultipleFiles(['foo.txt', 'bar.txt'], 'utf8', (err, contents) => {
-  if (err) {
-    throw err;
+readMultipleFiles([
+  'foo.txt', // 'Hello'
+  'bar.txt'  // 'World'
+], 'utf8').subscribe({
+  next({path, contents}) {
+    if (path === 'one.txt') {
+      contents; // 'Hello'
+    } else if (path === 'another.txt') {
+      contents; // 'World'
+    }
   }
-
-  contents; //=> ['Hello', 'World']
 });
 ```
 
-If it fails to read at least one of the files, it passes an error to the first argument and doesn't pass any values to the second argument.
+The `Observer` receives an error when it fails to read at least one of the files.
 
 ```javascript
 const readMultipleFiles = require('read-multiple-files');
 
-// foo.txt: exists
-// bar.txt: doesn't exist
-// baz.txt: exists
-
-readMultipleFiles(['foo.txt', 'bar.txt', 'baz.txt'], (err, contents) => {
-  err.code; //=> 'ENOENT'
-  contents; //=> undefined
-  arguments.length; //=> 1
+readMultipleFiles([
+  'foo.txt', // exists
+  'bar.txt'  // doesn't exist
+]).subscribe({
+  error(err) {
+    err.code; //=> ENOENT
+  },
+  complete() {
+    // `complete` callback will never be called.
+  }
 });
 ```
 
