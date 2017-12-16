@@ -3,6 +3,4 @@ branches:
   except: /^v\d/
 language: node_js
 node_js: node
-after_script:
-  - npm install coveralls
-  - node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls
+after_script: node_modules/.bin/nyc report --reporter=text-lcov | npx coveralls
