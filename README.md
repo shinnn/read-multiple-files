@@ -1,9 +1,9 @@
 # read-multiple-files
 
 [![npm version](https://img.shields.io/npm/v/read-multiple-files.svg)](https://www.npmjs.com/package/read-multiple-files)
-[![Build Status](https://travis-ci.org/shinnn/read-multiple-files.svg?branch=master)](https://travis-ci.org/shinnn/read-multiple-files)
+[![Build Status](https://travis-ci.com/shinnn/read-multiple-files.svg?branch=master)](https://travis-ci.com/shinnn/read-multiple-files)
 [![Build status](https://ci.appveyor.com/api/projects/status/ia3h5bcsy84vgfpc?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/read-multiple-files)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg)](https://coveralls.io/r/shinnn/read-multiple-files)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg)](https://coveralls.io/github/shinnn/read-multiple-files)
 
 Read multiple files [Observable](https://github.com/tc39/proposal-observable) way
 
@@ -29,7 +29,7 @@ readMultipleFiles(new Set([
 
 ## Installation
 
-[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/about-npm/).
 
 ```
 npm install read-multiple-files
@@ -45,7 +45,7 @@ const readMultipleFiles = require('read-multiple-files');
 
 *paths*: `<Array|Set<string|Buffer|URL|integer>>` (file paths)  
 *options*: `Object` ([`fs.readFile`](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback) options) or `string` (encoding)  
-Return: [`Observable`](https://tc39.github.io/proposal-observable/#observable) ([zenparsing's implementation](https://github.com/zenparsing/zen-observable))
+Return: [`Observable`](https://tc39.github.io/proposal-observable/#observable) ([Kevin Smith's implementation](https://github.com/zenparsing/zen-observable))
 
 When the `Observable` is [subscribe](https://tc39.github.io/proposal-observable/#observable-prototype-subscribe)d, it starts to read files in parallel, successively send each result to its [`Observer`](https://github.com/tc39/proposal-observable#observer) as an `Object`: `{path: <string|Buffer|URL|integer>, contents: <string:Buffer>}`
 
@@ -84,8 +84,8 @@ readMultipleFiles([
 
 ## Related project
 
-* [read-files-promise](https://github.com/shinnn/read-files-promise) ([Promises](https://promisesaplus.com/) version)
+* [read-files-promise](https://github.com/shinnn/read-files-promise) — `Promise` interface version
 
 ## License
 
-[ISC License](./LICENSE) © 2017 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2017 - 2018 Shinnosuke Watanabe

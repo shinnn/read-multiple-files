@@ -1,9 +1,9 @@
 'use strict';
 
 const {promisify} = require('util');
+const {readFile} = require('fs');
 
 const inspectWithKind = require('inspect-with-kind');
-const {readFile} = require('graceful-fs');
 const Observable = require('zen-observable');
 
 const promisifiedReadFile = promisify(readFile);
@@ -29,11 +29,17 @@ module.exports = function readMultipleFiles(...args) {
 			throw error;
 		}
 
-		Promise.all([...paths].map(async path => {
-			observer.next({
-				path,
-				contents: await promisifiedReadFile(path, options)
-			});
-		})).then(() => observer.complete(), err => observer.error(err));
+		(async () => {
+			try {
+				await Promise.all([...paths].map(async path => observer.next({
+					path,
+					contents: await promisifiedReadFile(path, options)
+				})));
+			} catch (err) {
+				observer.error(err);
+			}
+
+			observer.complete();
+		})();
 	});
 };

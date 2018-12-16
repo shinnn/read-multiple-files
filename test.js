@@ -4,7 +4,7 @@ const readMultipleFiles = require('.');
 const test = require('tape');
 
 const expected = [
-	Buffer.from('.nyc_output\nnode_modules\ncoverage\n'),
+	Buffer.from('coverage\nnode_modules\n'),
 	Buffer.from('* text=auto\n')
 ];
 
@@ -49,9 +49,10 @@ test('readMultipleFiles()', t => {
 		error: t.fail
 	});
 
-	readMultipleFiles([]).forEach(t.fail).then(() => {
+	(async () => {
+		await readMultipleFiles([]).forEach(t.fail);
 		t.pass('should support an empty array.');
-	}, t.fail);
+	})();
 
 	const complete = t.fail.bind(t, 'Unexpectedly completed.');
 
@@ -78,10 +79,10 @@ test('readMultipleFiles()', t => {
 	});
 
 	readMultipleFiles(['test.js', ['index.js']]).subscribe({
-		error(err) {
+		error({code}) {
 			t.equal(
-				err.toString(),
-				'TypeError: path must be a string or Buffer',
+				code,
+				'ERR_INVALID_ARG_TYPE',
 				'should throw an error when the array contains non-path values.'
 			);
 		},

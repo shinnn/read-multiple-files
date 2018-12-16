@@ -5,8 +5,8 @@
 	"repository": "shinnn/read-multiple-files",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
 	"scripts": {
-		"pretest": "eslint --fix --format=codeframe index.js test.js",
-		"test": "nyc --reporter=text --reporter=html node test.js"
+		"pretest": "eslint .",
+		"test": "nyc node test.js"
 	},
 	"license": "ISC",
 	"files": [
@@ -30,17 +30,20 @@
 		"asynchronously"
 	],
 	"dependencies": {
-		"graceful-fs": "^4.1.11",
-		"inspect-with-kind": "^1.0.4",
-		"zen-observable": "^0.6.0"
+		"inspect-with-kind": "^1.0.5",
+		"zen-observable": "^0.8.11"
 	},
 	"devDependencies": {
-		"@shinnn/eslint-config-node": "^5.0.0",
-		"eslint": "^4.13.1",
-		"nyc": "^11.4.1",
-		"tape": "^4.8.0"
+		"@shinnn/eslint-config": "^6.8.7",
+		"eslint": "^5.10.0",
+		"nyc": "^13.1.0",
+		"nyc-config-common": "^1.0.1",
+		"tape": "^4.9.1"
 	},
 	"eslintConfig": {
-		"extends": "@shinnn/node"
+		"extends": "@shinnn"
+	},
+	"nyc": {
+		"extends": "nyc-config-common"
 	}
 }
