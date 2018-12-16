@@ -5,7 +5,7 @@ const test = require('tape');
 
 const expected = [
 	Buffer.from('coverage\nnode_modules\n'),
-	Buffer.from('* text=auto\n')
+	Buffer.from('* text=auto eol=lf\n')
 ];
 
 test('readMultipleFiles()', t => {

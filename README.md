@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/read-multiple-files.svg)](https://www.npmjs.com/package/read-multiple-files)
 [![Build Status](https://travis-ci.com/shinnn/read-multiple-files.svg?branch=master)](https://travis-ci.com/shinnn/read-multiple-files)
-[![Build status](https://ci.appveyor.com/api/projects/status/ia3h5bcsy84vgfpc?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/read-multiple-files)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/read-multiple-files.svg)](https://coveralls.io/github/shinnn/read-multiple-files)
 
 Read multiple files [Observable](https://github.com/tc39/proposal-observable) way
