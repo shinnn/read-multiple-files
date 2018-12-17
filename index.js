@@ -1,6 +1,6 @@
 'use strict';
 
-const {promisify} = require('util');
+const {types: {isSet}, promisify} = require('util');
 const {readFile} = require('fs');
 
 const inspectWithKind = require('inspect-with-kind');
@@ -20,7 +20,7 @@ module.exports = function readMultipleFiles(...args) {
 
 		const [paths, options] = args;
 
-		if (!Array.isArray(paths) && !(paths instanceof Set)) {
+		if (!Array.isArray(paths) && !isSet(paths)) {
 			const error = new TypeError(`Expected file paths (<Array> or <Set>), but got ${
 				inspectWithKind(paths)
 			} instead.`);
